@@ -33,7 +33,7 @@ func (ws*Wallets) AddWallet() string {
 
 	ws.Wallets[address] = wallet
 
-	return
+	return address
 }
 
 func (ws *Wallets) GetAllAddresses() []string {
