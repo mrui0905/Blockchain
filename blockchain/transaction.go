@@ -16,20 +16,6 @@ type Transaction struct {
 	Outputs []TxOutput
 }
 
-// Transaction ouput- value contains the information, PubKey is needed to unlock transaction
-type TxOutput struct {
-	Value	int
-	PubKey	string
-}
-
-// Transaction input- Refrences transaction by ID and Out (index), uses Sig to unlock transaction
-type TxInput struct {
-	ID		[]byte
-	Out		int
-	Sig		string
-}
-
-
 // Creates Coinbase
 func CoinbaseTx(to, data string) *Transaction {
 	if data == "" {
@@ -61,16 +47,6 @@ func (tx *Transaction) SetID() {
 // Returns true if tx is the coinbase
 func (tx *Transaction) IsCoinbase() bool {
 	return len(tx.Inputs) == 1 && len(tx.Inputs[0].ID) == 0 && tx.Inputs[0].Out == -1
-}
-
-// Returns treue if TxInput can be unlocked
-func (in *TxInput) CanUnlock(data string) bool {
-	return in.Sig == data
-}
-
-// Return True if TxOutput can be unlocked
-func (out *TxOutput) CanBeUnlocked(data string) bool {
-	return out.PubKey == data
 }
 
 // Creates transaction baseed on the sender, receiver, and amount
