@@ -18,6 +18,7 @@ const (
 type Wallet struct {
 	PrivateKey ecdsa.PrivateKey
 	PublicKey  []byte
+	CrytoWallet string // Place holder for crpyto wallet, e.g. ETH
 }
 
 func (w Wallet) Address() []byte {
@@ -46,7 +47,7 @@ func NewKeyPair() (ecdsa.PrivateKey, []byte) {
 
 func MakeWallet() *Wallet {
 	private, public := NewKeyPair()
-	wallet := Wallet{private, public}
+	wallet := Wallet{private, public, ""}
 
 	return &wallet
 }
